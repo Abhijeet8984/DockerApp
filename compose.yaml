@@ -2,11 +2,36 @@ services:
   app:
     build: .
     image: myapp
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dockerapp
+      SPRING_DATASOURCE_USERNAME: dockerapp
+      SPRING_DATASOURCE_PASSWORD: dockerapp
     ports:
       - "8080:8080"
     volumes:
       - name-vol:/app
 
+  mysql:
+    image: mysql:8.4
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: dockerapp
+      MYSQL_USER: dockerapp
+      MYSQL_PASSWORD: dockerapp
+      MYSQL_ROOT_PASSWORD: change-this-root-password
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - mysql-data:/var/lib/mysql
+
 volumes:
   name-vol:
     name: name-vol
+  mysql-data:

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/dockerapp}
+    username: ${SPRING_DATASOURCE_USERNAME:dockerapp}
+    password: ${SPRING_DATASOURCE_PASSWORD:dockerapp}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
