@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    image: myapp
+    ports:
+      - "8080:8080"
+    volumes:
+      - name-vol:/app
+
+volumes:
+  name-vol:
+    name: name-vol

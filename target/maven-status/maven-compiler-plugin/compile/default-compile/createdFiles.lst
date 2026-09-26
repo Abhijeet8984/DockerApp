@@ -1,0 +1,4 @@
+com\example\dockerapp\NameFileStore.class
+com\example\dockerapp\NameFileStore$FileOperation.class
+com\example\dockerapp\HomeController.class
+com\example\dockerapp\DockerAppApplication.class
